@@ -9,11 +9,11 @@ class TicTacToe
   [0,4,8],
   [2,4,6]
   ]
-  
+
   def initialize(board = nil)
     @board = board || Array.new(9, " ")
   end
-  
+
   def display_board
     puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
     puts "-----------"
@@ -21,23 +21,23 @@ class TicTacToe
     puts "-----------"
     puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
   end
-  
+
   def input_to_index(user_input)
     user_input.to_i - 1
   end
-  
+
   def move(index, current_player = 'X')
     @board[index] = current_player
   end
-  
+
   def position_taken?(location)
     @board[location] != " " && @board[location] != ""
   end
-  
+
   def valid_move?(index)
     index.between?(0,8) && !position_taken?(index)
   end
-  
+
   def turn_count
     counter = 0
     @board.each do |move|
@@ -47,7 +47,7 @@ class TicTacToe
     end
     return counter
   end
-  
+
   def current_player
     if turn_count % 2 == 0
       return 'X'
@@ -55,7 +55,7 @@ class TicTacToe
       return 'O'
     end
   end
-  
+
   def turn
     puts "Please enter 1-9:"
     input = gets.strip
@@ -67,7 +67,7 @@ class TicTacToe
       turn()
     end
   end
-  
+
   def won?
     WIN_COMBINATIONS.each do |combination|
       moves = [@board[combination[0]], @board[combination[1]], @board[combination[2]]]
@@ -77,29 +77,29 @@ class TicTacToe
     end
     return false
   end
-  
+
   def full?
     @board.all? do |element|
       element == "X" || element == "O"
     end
   end
-  
+
   def draw?
     # if the board is full and no win exists, then true
     return (full?() && !(won?()))
-  end 
-  
+  end
+
   def over?
     # if board won or is a draw or is full, returns true
     return won?() || draw?()
   end
-  
+
   def winner
     if won?()
       return @board[won?()[0]]
     end
-  end  
-  
+  end
+
   def end_message
     if won?()
       puts "Congratulations #{winner()}!"
@@ -107,7 +107,7 @@ class TicTacToe
       puts "Cat's Game!"
     end
   end
-  
+
   # Define your play method below
   def play
     until over?() do
@@ -115,5 +115,5 @@ class TicTacToe
     end
     end_message()
   end
-    
+
 end
